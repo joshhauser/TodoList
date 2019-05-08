@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar id="title"><p id="head">{{title}}</p></mat-toolbar>
+<mat-card id="to-do">
+  <mat-card-title>To-do</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-list *ngFor="let task of tasks" fxLayout="row inline">
+    <mat-list-item>
+        <mat-checkbox labelPosition="after"><p>{{task}}</p></mat-checkbox>
+    </mat-list-item>
+  </mat-list>
+  <mat-divider></mat-divider>
+  <div id="form">
+    <form action="">
+      <mat-form-field>
+        <input matInput #task placeholder="Add a new task">
+      </mat-form-field>
+    </form>
+  </div>
+  <button mat-button (click)="addNewTask(task.value); task.value=''">
+    Add
+  </button>
+</mat-card>
+<router-outlet></router-outlet>
