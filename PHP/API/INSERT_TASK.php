@@ -9,7 +9,7 @@ $connection = mysqli_connect($server,$login,$dbPass)
 or die("Impossible to connect");
 
 mysqli_select_db($connection,$db)
-or die("Databse not found.");
+or die("Database not found.");
 
 $insertRequest = "INSERT INTO $table(task)";
 $insertRequest .= "VALUES(?)";
