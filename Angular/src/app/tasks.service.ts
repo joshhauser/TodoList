@@ -18,21 +18,14 @@ export class TasksService {
     return this.tasks;
   }
 
-  addTask(t: string){
-    if(t != ''){
-      this.tasks.push(t);
-      this.setTasks();
-    }
-    
-  }
+
 
   addNewTask(t: string){
-    if(t != ""){
-      let task = {
-        task: t
-      }
-      return this.http.post(this.baseUrl + 'INSERT_TASK.php', { data : task}).toPromise();
+    let task = {
+      task: t
     }
+    return this.http.post(this.baseUrl + 'INSERT_TASK.php', { data : task}).toPromise();
+
   }
 
   getTasks(): Observable<any[]>{
@@ -43,5 +36,9 @@ export class TasksService {
       })
     );
     
+  }
+
+  deleteTask(t: any){
+    this.http.delete(this.baseUrl + 'DELETE_TASK.php?task=' + t).toPromise();
   }
 }

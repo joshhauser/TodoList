@@ -35,6 +35,10 @@ export class AppComponent {
   }
 
   deleteTask(t: any){
-    console.log(t);
+    if(t != ""){
+      this.tasksService.deleteTask(t);
+      let index = this.tasks.indexOf(t);
+      this.tasks.splice(index, 1);
+    }
   }
 }
