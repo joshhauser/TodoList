@@ -33,4 +33,8 @@ export class AppComponent {
       this.tasks.sort();
     }
   }
+
+  deleteTask(t: any){
+    console.log(t);
+  }
 }

@@ -26,7 +26,6 @@ export class TasksService {
     
   }
 
-  /*** TESTS ***/
   addNewTask(t: string){
     if(t != ""){
       let task = {

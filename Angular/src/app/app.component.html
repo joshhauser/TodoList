@@ -6,18 +6,22 @@
   <mat-list *ngFor="let task of tasks" fxLayout="row inline">
     <mat-list-item>
         <mat-checkbox labelPosition="after"><p>{{task}}</p></mat-checkbox>
+        <div id="grow"></div> 
+        <button mat-icon-button (click)="deleteTask(task)">
+          <mat-icon>delete</mat-icon>
+        </button>
     </mat-list-item>
   </mat-list>
   <mat-divider></mat-divider>
   <div id="form">
-    <form action="">
+    <form>
       <mat-form-field>
         <input matInput #task placeholder="Add a new task">
       </mat-form-field>
+      <button id="addTask" mat-raised-button color="warn" (click)="addNewTask(task.value); task.value=''">
+          Add
+      </button>
     </form>
   </div>
-  <button mat-raised-button colo="warn" (click)="addNewTask(task.value); task.value=''">
-    Add
-  </button>
 </mat-card>
 <router-outlet></router-outlet>
