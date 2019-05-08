@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TasksService } from './tasks.service';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,10 @@ export class AppComponent {
 
   
   addNewTask(t: any){
-    this.tasksService.addNewTask(t);
-    this.tasks.push(t);
-    this.tasks.sort();
+    if(t != ""){
+      this.tasksService.addNewTask(t);
+      this.tasks.push(t);
+      this.tasks.sort();
+    }
   }
-
 }
