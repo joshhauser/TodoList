@@ -3,6 +3,7 @@
 <mat-card id="to-do">
   <mat-card-title>To-do</mat-card-title>
   <mat-divider></mat-divider>
+  <p id="noTask" *ngIf="tasks.length === 0">You don't have any task to achieve today !</p>
   <mat-list *ngFor="let task of tasks" fxLayout="row inline">
     <mat-list-item>
         <mat-checkbox labelPosition="after"><p>{{task}}</p></mat-checkbox>
