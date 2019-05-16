@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TasksService } from './tasks.service';
-import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
