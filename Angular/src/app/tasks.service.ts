@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TasksService {
 
-  baseUrl = 'http://localhost/todolist/API/';
+  baseUrl = 'http://jhauserprojects.000webhostapp.com/todolist/API/';
 
   private tasks = [];
 
