@@ -1,40 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Task } from './task/model/model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
-  baseUrl = 'http://jhauserprojects.000webhostapp.com/todolist/API/';
+  baseUrl = 'http://localhost/todolist/API/';
 
-  private tasks = [];
+  private _tasks = [];
+  public tasks: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(null);
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
-  addNewTask(t: string){
+  addNewTask(taskContent: string, boardID: number){
     let task = {
-      task: t
+      taskContent: taskContent,
+      boardID: boardID
     }
-    return this.http.post(this.baseUrl + 'INSERT_TASK.php', { data : task}).toPromise().then(() => this.openSnackBar('The task ' + task.task + ' has been added successfully !'));
-
+    return this.http.post(this.baseUrl + 'INSERT_TASK.php', { data : task}).toPromise()
+    .then(() => this.openSnackBar('The task ' + task.taskContent + ' has been added successfully !'));
   }
 
-  getTasks(): Observable<any[]>{
-    return this.http.get(this.baseUrl + 'SELECT_TASKS.php').pipe(
-      map((res) => {
-        this.tasks = res['data'];
-        return this.tasks;
-      })
-    );
-    
+  refreshTasks(){
+    return this.http.get(this.baseUrl + 'SELECT_TASKS.php').toPromise()
+    .then((res) => this.tasks.next(Task.deserialize(res['data'])));
   }
 
-  deleteTask(t: any){
-    this.http.delete(this.baseUrl + 'DELETE_TASK.php?task=' + t).toPromise().then(() => this.openSnackBar('The task ' + t + ' has been deleted successfully !'));
+  deleteTask(task: Task){
+    this.http.delete(this.baseUrl + 'DELETE_TASK.php?id=' + task.id).toPromise()
+    .then(() => this.openSnackBar('The task ' + task.content + ' has been deleted successfully !'));
   }
 
   openSnackBar(message: string){

@@ -15,7 +15,8 @@ $request = "SELECT * from $table";
 $result = mysqli_query($connection,$request);
 
 while($row = mysqli_fetch_row($result)){
-    $tasks[$index] = $row[1];
+    $tasks[$index]['id'] = $row[0];
+    $tasks[$index]['content'] = $row[1];
     $index++;
 }
 

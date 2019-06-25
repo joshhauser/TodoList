@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TasksService } from './tasks.service';
+import { Task } from './task/model/model';
 
 @Component({
   selector: 'app-root',
@@ -20,24 +21,25 @@ export class AppComponent {
   }
 
   getTasks(){
-    this.tasksService.getTasks().subscribe(res => this.tasks = res);
-    this.tasks.sort();
+    this.tasksService.refreshTasks()
+    .then(() => {
+      this.tasks = this.tasksService.tasks.value;
+      this.tasks.sort();
+    });
   }
 
   
-  addNewTask(t: any){
-    if(t != ""){
-      this.tasksService.addNewTask(t);
-      this.tasks.push(t);
+  addNewTask(taskContent: any){
+    if(taskContent != ""){
+      this.tasksService.addNewTask(taskContent, null);
+      this.tasks.push(taskContent);
       this.tasks.sort();
     }
   }
 
-  deleteTask(t: any){
-    if(t != ""){
-      this.tasksService.deleteTask(t);
-      let index = this.tasks.indexOf(t);
-      this.tasks.splice(index, 1);
-    }
+  deleteTask(task: Task){
+    this.tasksService.deleteTask(task);
+    let index = this.tasks.indexOf(task);
+    this.tasks.splice(index, 1);
   }
 }
