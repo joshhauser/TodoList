@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from './model/model';
 
 @Injectable({
@@ -24,9 +23,9 @@ export class TasksService {
     .then(() => this.refreshTasks());
   }
 
-  refreshTasks(){
-    return this.http.get(this.baseUrl + 'SELECT_TASKS.php').toPromise()
-    .then((res) => this.tasks.next(Task.deserialize(res['data'])));
+  async refreshTasks(){
+    const res = await this.http.get(this.baseUrl + 'SELECT_TASKS.php').toPromise();
+    return this.tasks.next(Task.unserialize(res['data']));
   }
 
   deleteTask(task: Task){

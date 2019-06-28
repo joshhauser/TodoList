@@ -9,7 +9,7 @@ export class Task {
     this.boardID = boardID;
   }
 
-  static deserialize(jsonArray: any[]){
+  static unserialize(jsonArray: any[]){
     return jsonArray.map(res => new Task(res.id, res.content, res.boardID));
   }
 }
