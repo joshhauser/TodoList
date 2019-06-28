@@ -11,9 +11,9 @@ or die("Impossible to connect");
 mysqli_select_db($connection,$db)
 or die("Database not found.");
 
-$deleteRequest = "DELETE FROM $table WHERE task='$id'";
+$deleteRequest = "DELETE FROM $table WHERE id='$id'";
 
-$result = mysqli_query($connection,$deleteRequest);
+$result = mysqli_query($connection, $deleteRequest);
 
 mysqli_close($connection);
 ?>
