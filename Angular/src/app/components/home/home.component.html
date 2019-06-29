@@ -1,9 +1,9 @@
 <mat-toolbar><p id="head">{{title}}</p></mat-toolbar>
 <div class="boards" fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="3em" fxLayoutAlign="flex-start">
-  <mat-card (click)="goToBoard(board.id)" fxLayoutAlign="center center" fxFlex="0 1 calc(33.3% - 3em)" fxFlex.lt-md="0 1 calc(50% - 3em)" fxFlex.lt-sm="100%" *ngFor="let board of boards | async">
+  <mat-card (click)="goToBoard(board.id)" fxLayoutAlign="center center" fxFlex="0 1 calc(25% - 3em)" fxFlex.lt-md="0 1 calc(50% - 3em)" fxFlex.lt-sm="100%" *ngFor="let board of boards | async">
     {{board.name}}
   </mat-card>
-  <div (click)="createBoard()" id="createBoard" fxFlex="0 1 calc(33.3% - 1.5em)" fxFlex.lt-md="0 1 calc(50% - 1.5em)" fxFlex.lt-sm="100%" fxLayoutAlign="center center">
+  <div (click)="createBoard()" id="createBoard" fxFlex="0 1 calc(25% - 1.5em)" fxFlex.lt-md="0 1 calc(50% - 1.5em)" fxFlex.lt-sm="100%" fxLayoutAlign="center center">
     <span>+</span>
   </div>
 </div>
