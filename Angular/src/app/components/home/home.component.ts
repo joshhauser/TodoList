@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Board } from 'src/app/model/model';
 import { BoardsService } from 'src/app/services/boards.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateBoardComponent } from '../dialogs/create-board/create-board.component';
 
 @Component({
   selector: 'home',
@@ -14,7 +16,8 @@ export class HomeComponent implements OnInit {
   public boards = new Observable<Board[]>();
   
   constructor(
-    private boardService: BoardsService
+    private boardService: BoardsService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -26,7 +29,29 @@ export class HomeComponent implements OnInit {
   }
 
   createBoard(){
-    console.log('ok');
+    const dialogRef = this.dialog.open(CreateBoardComponent, {
+      width: '700px',
+      height: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
+
   }
 
+
+  /* createTask(listIndex: number): void {
+    const dialogRef = this.dialog.open(CreateTask, {
+      width: '500px',
+      height: '270px',
+      data: listIndex
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if(res != undefined && res != ''){
+        this.flushArrays();
+        this.getTasks();   
+      }
+    });
+  }
+ */
 }

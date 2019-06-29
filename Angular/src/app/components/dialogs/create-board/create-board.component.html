@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Create a new board</h1>
+<div fxLayout="column">
+  <div class="tips" style="margin-top: 1em">
+    <span>A board is a container for tasks. You can create as many board as you want, so that you can classify your tasks by category, relevance, priority...</span>
+  </div>
+  <form [formGroup]="form" style="margin-top: 2em" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Board name:</mat-label>
+      <input formControlName="name" matInput placeholder="Board name" type="text" required>
+      <mat-error *ngIf="form.get('name').invalid">You must choose a name for your new board.</mat-error>
+    </mat-form-field>
+    <mat-form-field style="margin-top: 1em;">
+      <mat-label>Color:</mat-label>
+      <input formControlName="color" matInput type="color">
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button (click)="validate()" mat-raised-button color="warn">Confirm</button>
+  </div>
+</div>

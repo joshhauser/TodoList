@@ -12,11 +12,11 @@ mysqli_select_db($connection,$db)
 or die("Database not found.");
 
 $insertRequest = "INSERT INTO $table(name)";
-$insertRequest .= "VALUES(?)";
+$insertRequest .= "VALUES(?,?)";
 
 $requestPrepare = mysqli_prepare($connection, $insertRequest);
 
-mysqli_stmt_bind_param($requestPrepare,'s', $datas->data->name);
+mysqli_stmt_bind_param($requestPrepare,'ss', $datas->data->name, $datas->data->color);
 mysqli_stmt_execute($requestPrepare);
 mysqli_close($connection);
 ?>

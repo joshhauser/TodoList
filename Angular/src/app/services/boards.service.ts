@@ -20,8 +20,8 @@ export class BoardsService {
     .then((res) => this.boards.next(Board.unserialize(res['data'])));
   }
 
-  postBoard(name: string){
-    return this.httpClient.post(this.url + 'INSERT.php', {data: name}).toPromise()
+  postBoard(board: any){
+    return this.httpClient.post(this.url + 'INSERT.php', {data: board}).toPromise()
     .then(() => this.refreshBoards());
   }
 

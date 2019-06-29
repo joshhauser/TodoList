@@ -18,13 +18,15 @@ export class Task {
 export class Board {
   id: number;
   name: string;
+  color: string;
 
-  constructor(id: number, name: string){
+  constructor(id: number, name: string, color: string){
     this.id = id;
     this.name = name;
+    this.color = color;
   }
 
   static unserialize(jsonArray: any[]){
-    return jsonArray.map(res => new Board(res.id, res.name));
+    return jsonArray.map(res => new Board(res.id, res.name, res.color));
   }
 }

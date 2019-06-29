@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,12 +23,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BoardComponent } from './components/board/board.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './components/home/home.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreateBoardComponent } from './components/dialogs/create-board/create-board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    HomeComponent
+    HomeComponent,
+    CreateBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +50,14 @@ import { HomeComponent } from './components/home/home.component';
     MatButtonModule,
     HttpClientModule,
     MatSnackBarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CreateBoardComponent
+  ]
 })
 export class AppModule { }

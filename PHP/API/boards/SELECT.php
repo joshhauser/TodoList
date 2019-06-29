@@ -16,6 +16,7 @@ $result = mysqli_query($connection,$request);
 while($row = mysqli_fetch_row($result)){
     $boards[$index]['id'] = $row[0];
     $boards[$index]['name'] = $row[1];
+    $boards[$index]['color'] = $row[2];
     $index++;
 }
 
