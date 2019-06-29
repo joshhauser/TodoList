@@ -19,15 +19,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 import { BoardComponent } from './components/board/board.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksListComponent,
-    BoardComponent
+    BoardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

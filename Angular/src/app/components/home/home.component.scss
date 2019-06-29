@@ -1,0 +1,26 @@
+.boards{
+  margin: 3em 1.5em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+
+  mat-card{
+    margin: 0 0 2em 0;
+    height: 10em;
+  }
+
+  mat-card:hover, #createBoard:hover{
+    cursor: pointer;
+  }
+
+  #createBoard{
+    border: dashed 3px gray;
+    height: 5em;
+    font-size: 2em;
+    color: gray;
+  }
+}

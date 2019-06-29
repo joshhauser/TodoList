@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Board } from 'src/app/model/model';
-import { BoardsService } from 'src/app/services/boards.service';
+import { Task } from 'src/app/model/model';
+import { TasksService } from 'src/app/services/tasks.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -12,21 +13,35 @@ import { BoardsService } from 'src/app/services/boards.service';
 export class BoardComponent implements OnInit {
 
   title= "To-do List";
-  public boards = new Observable<Board[]>();
+  tasks = [];
+  public _tasks = new Observable<Task[]>(null);
 
   constructor(
-    private boardService: BoardsService
+    private tasksService: TasksService,
+    private snackBar: MatSnackBar
   ) { }
 
-  ngOnInit() {
-    this.boardService.refreshBoards()
-    .then(() => this.boards = this.boardService.boards);
+  ngOnInit(){
+    /* this.tasksService.refreshTasks()
+    .then(() => this._tasks = this.tasksService.tasks); */
+  }
+  
+  addNewTask(taskContent: any){
+   /*  if(taskContent != ""){
+      this.tasksService.addNewTask(taskContent, null);
+      this.tasksService.refreshTasks()
+    }else{
+      this.openSnackBar('A task can\'t be empty !');
+    } */
   }
 
-  goToBoard(id: number){
+  deleteTask(task: Task){
+    this.tasksService.deleteTask(task)
+    .then(() => this.openSnackBar('The task ' + task.content + ' has been deleted successfully !'));
   }
 
-  createBoard(){
-    console.log('ok');
+  openSnackBar(message: string){
+    let snackbar = this.snackBar.open(message, 'Cancel');
+    snackbar.onAction().subscribe(() => this.snackBar.dismiss());
   }
 }
