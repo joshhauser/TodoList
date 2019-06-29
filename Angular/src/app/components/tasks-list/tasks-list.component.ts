@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/model/model';
-import { TasksService } from 'src/app/tasks.service';
+import { TasksService } from 'src/app/services/tasks.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -21,17 +21,17 @@ export class TasksListComponent implements OnInit {
   }
   
   ngOnInit(){
-    this.tasksService.refreshTasks()
-    .then(() => this._tasks = this.tasksService.tasks);
+    /* this.tasksService.refreshTasks()
+    .then(() => this._tasks = this.tasksService.tasks); */
   }
   
   addNewTask(taskContent: any){
-    if(taskContent != ""){
+   /*  if(taskContent != ""){
       this.tasksService.addNewTask(taskContent, null);
       this.tasksService.refreshTasks()
     }else{
       this.openSnackBar('A task can\'t be empty !');
-    }
+    } */
   }
 
   deleteTask(task: Task){

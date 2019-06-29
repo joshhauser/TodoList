@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { TasksService } from './tasks.service';
-import { Task } from './model/model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',

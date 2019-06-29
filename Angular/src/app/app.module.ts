@@ -20,11 +20,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
+import { BoardComponent } from './components/board/board.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksListComponent
+    TasksListComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
