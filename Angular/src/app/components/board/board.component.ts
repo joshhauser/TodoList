@@ -25,4 +25,8 @@ export class BoardComponent implements OnInit {
 
   goToBoard(id: number){
   }
+
+  createBoard(){
+    console.log('ok');
+  }
 }

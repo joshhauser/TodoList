@@ -3,10 +3,17 @@
 
   mat-card{
     margin: 0 0 2em 0;
-    height: 5em;
+    height: 10em;
   }
-}
 
-.boards :nth-child(5n){
-  margin-right: 0 !important;
+  mat-card:hover, #createBoard:hover{
+    cursor: pointer;
+  }
+
+  #createBoard{
+    border: dashed 3px gray;
+    height: 5em;
+    font-size: 2em;
+    color: gray;
+  }
 }
