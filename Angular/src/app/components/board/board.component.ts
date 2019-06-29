@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BoardService } from 'src/app/services/board.service';
 import { Observable } from 'rxjs';
 import { Board } from 'src/app/model/model';
+import { BoardsService } from 'src/app/services/boards.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit {
   public boards = new Observable<Board[]>();
 
   constructor(
-    private boardService: BoardService
+    private boardService: BoardsService
   ) { }
 
   ngOnInit() {

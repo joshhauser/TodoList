@@ -19,7 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to MatList.
 /**
@@ -74,7 +74,9 @@ MatNavList.decorators = [
 ];
 class MatList extends _MatListMixinBase {
     /**
-     * @param {?} _elementRef
+     * @deprecated _elementRef parameter to be made required.
+     * \@breaking-change 8.0.0
+     * @param {?=} _elementRef
      */
     constructor(_elementRef) {
         super();
@@ -83,7 +85,7 @@ class MatList extends _MatListMixinBase {
          * Emits when the state of the list changes.
          */
         this._stateChanges = new Subject();
-        if (this._getListType() === 'action-list') {
+        if (this._getListType() === 'action-list' && _elementRef) {
             _elementRef.nativeElement.classList.add('mat-action-list');
         }
     }
@@ -92,12 +94,17 @@ class MatList extends _MatListMixinBase {
      */
     _getListType() {
         /** @type {?} */
-        const nodeName = this._elementRef.nativeElement.nodeName.toLowerCase();
-        if (nodeName === 'mat-list') {
-            return 'list';
-        }
-        if (nodeName === 'mat-action-list') {
-            return 'action-list';
+        const elementRef = this._elementRef;
+        // @breaking-change 8.0.0 Remove null check once _elementRef is a required param.
+        if (elementRef) {
+            /** @type {?} */
+            const nodeName = elementRef.nativeElement.nodeName.toLowerCase();
+            if (nodeName === 'mat-list') {
+                return 'list';
+            }
+            if (nodeName === 'mat-action-list') {
+                return 'action-list';
+            }
         }
         return null;
     }
@@ -173,11 +180,13 @@ MatListSubheaderCssMatStyler.decorators = [
 class MatListItem extends _MatListItemMixinBase {
     /**
      * @param {?} _element
-     * @param {?} _changeDetectorRef
      * @param {?=} navList
      * @param {?=} list
+     * @param {?=} _changeDetectorRef
      */
-    constructor(_element, _changeDetectorRef, navList, list) {
+    constructor(_element, navList, list, 
+    // @breaking-change 8.0.0 `_changeDetectorRef` to be made into a required parameter.
+    _changeDetectorRef) {
         super();
         this._element = _element;
         this._isInteractiveList = false;
@@ -191,15 +200,13 @@ class MatListItem extends _MatListItemMixinBase {
         if (element.nodeName.toLowerCase() === 'button' && !element.hasAttribute('type')) {
             element.setAttribute('type', 'button');
         }
-        if (this._list) {
+        // @breaking-change 8.0.0 Remove null check for _changeDetectorRef.
+        if (this._list && _changeDetectorRef) {
             // React to changes in the state of the parent list since
             // some of the item's properties depend on it (e.g. `disableRipple`).
-            this._list._stateChanges.pipe(takeUntil(this._destroyed)).subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this._list._stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
                 _changeDetectorRef.markForCheck();
-            }));
+            });
         }
     }
     /**
@@ -249,19 +256,19 @@ MatListItem.decorators = [
 /** @nocollapse */
 MatListItem.ctorParameters = () => [
     { type: ElementRef },
-    { type: ChangeDetectorRef },
     { type: MatNavList, decorators: [{ type: Optional }] },
-    { type: MatList, decorators: [{ type: Optional }] }
+    { type: MatList, decorators: [{ type: Optional }] },
+    { type: ChangeDetectorRef }
 ];
 MatListItem.propDecorators = {
-    _lines: [{ type: ContentChildren, args: [MatLine, { descendants: true },] }],
-    _avatar: [{ type: ContentChild, args: [MatListAvatarCssMatStyler, { static: false },] }],
-    _icon: [{ type: ContentChild, args: [MatListIconCssMatStyler, { static: false },] }]
+    _lines: [{ type: ContentChildren, args: [MatLine,] }],
+    _avatar: [{ type: ContentChild, args: [MatListAvatarCssMatStyler,] }],
+    _icon: [{ type: ContentChild, args: [MatListIconCssMatStyler,] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
@@ -283,10 +290,7 @@ const _MatListOptionMixinBase = mixinDisableRipple(MatListOptionBase);
  */
 const MAT_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef((/**
-     * @return {?}
-     */
-    () => MatSelectionList)),
+    useExisting: forwardRef(() => MatSelectionList),
     multi: true
 };
 /**
@@ -326,16 +330,6 @@ class MatListOption extends _MatListOptionMixinBase {
          */
         this.checkboxPosition = 'after';
     }
-    /**
-     * Theme color of the list option. This sets the color of the checkbox.
-     * @return {?}
-     */
-    get color() { return this._color || this.selectionList.color; }
-    /**
-     * @param {?} newValue
-     * @return {?}
-     */
-    set color(newValue) { this._color = newValue; }
     /**
      * Value of the option
      * @return {?}
@@ -396,15 +390,12 @@ class MatListOption extends _MatListOptionMixinBase {
         // that the form control value is not being overwritten.
         /** @type {?} */
         const wasSelected = this._selected;
-        Promise.resolve().then((/**
-         * @return {?}
-         */
-        () => {
+        Promise.resolve().then(() => {
             if (this._selected || wasSelected) {
                 this.selected = true;
                 this._changeDetector.markForCheck();
             }
-        }));
+        });
     }
     /**
      * @return {?}
@@ -419,12 +410,7 @@ class MatListOption extends _MatListOptionMixinBase {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
-            Promise.resolve().then((/**
-             * @return {?}
-             */
-            () => {
-                this.selected = false;
-            }));
+            Promise.resolve().then(() => this.selected = false);
         }
         /** @type {?} */
         const hadFocus = this._hasFocus;
@@ -537,11 +523,6 @@ MatListOption.decorators = [
                     'tabindex': '-1',
                     '[class.mat-list-item-disabled]': 'disabled',
                     '[class.mat-list-item-with-avatar]': '_avatar || _icon',
-                    // Manually set the "primary" or "warn" class if the color has been explicitly
-                    // set to "primary" or "warn". The pseudo checkbox picks up these classes for
-                    // its theme. The accent theme palette is the default and doesn't need to be set.
-                    '[class.mat-primary]': 'color === "primary"',
-                    '[class.mat-warn]': 'color === "warn"',
                     '[attr.aria-selected]': 'selected.toString()',
                     '[attr.aria-disabled]': 'disabled.toString()',
                 },
@@ -554,18 +535,14 @@ MatListOption.decorators = [
 MatListOption.ctorParameters = () => [
     { type: ElementRef },
     { type: ChangeDetectorRef },
-    { type: MatSelectionList, decorators: [{ type: Inject, args: [forwardRef((/**
-                     * @return {?}
-                     */
-                    () => MatSelectionList)),] }] }
+    { type: MatSelectionList, decorators: [{ type: Inject, args: [forwardRef(() => MatSelectionList),] }] }
 ];
 MatListOption.propDecorators = {
-    _avatar: [{ type: ContentChild, args: [MatListAvatarCssMatStyler, { static: false },] }],
-    _icon: [{ type: ContentChild, args: [MatListIconCssMatStyler, { static: false },] }],
+    _avatar: [{ type: ContentChild, args: [MatListAvatarCssMatStyler,] }],
+    _icon: [{ type: ContentChild, args: [MatListIconCssMatStyler,] }],
     _lines: [{ type: ContentChildren, args: [MatLine,] }],
-    _text: [{ type: ViewChild, args: ['text', { static: false },] }],
+    _text: [{ type: ViewChild, args: ['text',] }],
     checkboxPosition: [{ type: Input }],
-    color: [{ type: Input }],
     value: [{ type: Input }],
     disabled: [{ type: Input }],
     selected: [{ type: Input }]
@@ -589,10 +566,6 @@ class MatSelectionList extends _MatSelectionListMixinBase {
          * Tabindex of the selection list.
          */
         this.tabIndex = 0;
-        /**
-         * Theme color of the selection list. This sets the checkbox color for all list options.
-         */
-        this.color = 'accent';
         this._disabled = false;
         /**
          * The currently selected options.
@@ -601,11 +574,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
         /**
          * View to model callback that should be called whenever the selected options change.
          */
-        this._onChange = (/**
-         * @param {?} _
-         * @return {?}
-         */
-        (_) => { });
+        this._onChange = (_) => { };
         /**
          * Subscription to sync value changes in the SelectionModel back to the SelectionList.
          */
@@ -613,10 +582,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
         /**
          * View to model callback that should be called if the list or its options lost focus.
          */
-        this._onTouched = (/**
-         * @return {?}
-         */
-        () => { });
+        this._onTouched = () => { };
         this.tabIndex = parseInt(tabIndex) || 0;
     }
     /**
@@ -645,21 +611,14 @@ class MatSelectionList extends _MatSelectionListMixinBase {
             .withTypeAhead()
             // Allow disabled items to be focusable. For accessibility reasons, there must be a way for
             // screenreader users, that allows reading the different options of the list.
-            .skipPredicate((/**
-         * @return {?}
-         */
-        () => false))
+            .skipPredicate(() => false)
             .withAllowedModifierKeys(['shiftKey']);
         if (this._tempValues) {
             this._setOptionsFromValues(this._tempValues);
             this._tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this._modelChanges = this.selectedOptions.onChange.subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        event => {
+        this._modelChanges = this.selectedOptions.onChange.subscribe(event => {
             if (event.added) {
                 for (let item of event.added) {
                     item.selected = true;
@@ -670,7 +629,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
                     item.selected = false;
                 }
             }
-        }));
+        });
     }
     /**
      * @param {?} changes
@@ -678,11 +637,8 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      */
     ngOnChanges(changes) {
         /** @type {?} */
-        const disableRippleChanges = changes['disableRipple'];
-        /** @type {?} */
-        const colorChanges = changes['color'];
-        if ((disableRippleChanges && !disableRippleChanges.firstChange) ||
-            (colorChanges && !colorChanges.firstChange)) {
+        const disableRippleChanges = changes.disableRipple;
+        if (disableRippleChanges && !disableRippleChanges.firstChange) {
             this._markOptionsForCheck();
         }
     }
@@ -690,7 +646,6 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      * @return {?}
      */
     ngOnDestroy() {
-        this._destroyed = true;
         this._modelChanges.unsubscribe();
     }
     /**
@@ -773,11 +728,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
                 break;
             case A:
                 if (hasModifierKey(event, 'ctrlKey')) {
-                    this.options.find((/**
-                     * @param {?} option
-                     * @return {?}
-                     */
-                    option => !option.selected)) ? this.selectAll() : this.deselectAll();
+                    this.options.find(option => !option.selected) ? this.selectAll() : this.deselectAll();
                     event.preventDefault();
                 }
                 break;
@@ -794,10 +745,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      * @return {?}
      */
     _reportValueChange() {
-        // Stop reporting value changes after the list has been destroyed. This avoids
-        // cases where the list might wrongly reset its value once it is removed, but
-        // the form control is still live.
-        if (this.options && !this._destroyed) {
+        if (this.options) {
             this._onChange(this._getSelectedOptionValues());
         }
     }
@@ -853,33 +801,21 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      * @return {?}
      */
     _setOptionsFromValues(values) {
-        this.options.forEach((/**
-         * @param {?} option
-         * @return {?}
-         */
-        option => option._setSelected(false)));
-        values.forEach((/**
-         * @param {?} value
-         * @return {?}
-         */
-        value => {
+        this.options.forEach(option => option._setSelected(false));
+        values.forEach(value => {
             /** @type {?} */
-            const correspondingOption = this.options.find((/**
-             * @param {?} option
-             * @return {?}
-             */
-            option => {
+            const correspondingOption = this.options.find(option => {
                 // Skip options that are already in the model. This allows us to handle cases
                 // where the same primitive value is selected multiple times.
                 if (option.selected) {
                     return false;
                 }
                 return this.compareWith ? this.compareWith(option.value, value) : option.value === value;
-            }));
+            });
             if (correspondingOption) {
                 correspondingOption._setSelected(true);
             }
-        }));
+        });
     }
     /**
      * Returns the values of the selected options.
@@ -887,15 +823,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      * @return {?}
      */
     _getSelectedOptionValues() {
-        return this.options.filter((/**
-         * @param {?} option
-         * @return {?}
-         */
-        option => option.selected)).map((/**
-         * @param {?} option
-         * @return {?}
-         */
-        option => option.value));
+        return this.options.filter(option => option.selected).map(option => option.value);
     }
     /**
      * Toggles the state of the currently focused option if enabled.
@@ -928,15 +856,11 @@ class MatSelectionList extends _MatSelectionListMixinBase {
         // emit the changed event when something actually changed.
         /** @type {?} */
         let hasChanged = false;
-        this.options.forEach((/**
-         * @param {?} option
-         * @return {?}
-         */
-        option => {
+        this.options.forEach(option => {
             if (option._setSelected(isSelected)) {
                 hasChanged = true;
             }
-        }));
+        });
         if (hasChanged) {
             this._reportValueChange();
         }
@@ -966,11 +890,7 @@ class MatSelectionList extends _MatSelectionListMixinBase {
      */
     _markOptionsForCheck() {
         if (this.options) {
-            this.options.forEach((/**
-             * @param {?} option
-             * @return {?}
-             */
-            option => option._markForCheck()));
+            this.options.forEach(option => option._markForCheck());
         }
     }
 }
@@ -1003,14 +923,13 @@ MatSelectionList.propDecorators = {
     options: [{ type: ContentChildren, args: [MatListOption, { descendants: true },] }],
     selectionChange: [{ type: Output }],
     tabIndex: [{ type: Input }],
-    color: [{ type: Input }],
     compareWith: [{ type: Input }],
     disabled: [{ type: Input }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MatListModule {
 }
@@ -1046,13 +965,13 @@ MatListModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MatListModule, MatNavList, MatList, MatListAvatarCssMatStyler, MatListIconCssMatStyler, MatListSubheaderCssMatStyler, MatListItem, MAT_SELECTION_LIST_VALUE_ACCESSOR, MatSelectionListChange, MatListOption, MatSelectionList };
+export { MatListModule, MatListBase, _MatListMixinBase, MatListItemBase, _MatListItemMixinBase, MatNavList, MatList, MatListAvatarCssMatStyler, MatListIconCssMatStyler, MatListSubheaderCssMatStyler, MatListItem, MatSelectionListBase, _MatSelectionListMixinBase, MatListOptionBase, _MatListOptionMixinBase, MAT_SELECTION_LIST_VALUE_ACCESSOR, MatSelectionListChange, MatListOption, MatSelectionList };
 //# sourceMappingURL=list.js.map

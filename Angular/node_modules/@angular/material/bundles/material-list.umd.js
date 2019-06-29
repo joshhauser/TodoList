@@ -42,13 +42,13 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to MatList.
 /**
  * \@docs-private
  */
-var 
+var   
 // Boilerplate for applying mixins to MatList.
 /**
  * \@docs-private
@@ -64,7 +64,7 @@ var _MatListMixinBase = core$1.mixinDisableRipple(MatListBase);
 /**
  * \@docs-private
  */
-var 
+var   
 // Boilerplate for applying mixins to MatListItem.
 /**
  * \@docs-private
@@ -122,6 +122,10 @@ var MatNavList = /** @class */ (function (_super) {
 }(_MatListMixinBase));
 var MatList = /** @class */ (function (_super) {
     __extends(MatList, _super);
+    /**
+     * @deprecated _elementRef parameter to be made required.
+     * @breaking-change 8.0.0
+     */
     function MatList(_elementRef) {
         var _this = _super.call(this) || this;
         _this._elementRef = _elementRef;
@@ -129,7 +133,7 @@ var MatList = /** @class */ (function (_super) {
          * Emits when the state of the list changes.
          */
         _this._stateChanges = new rxjs.Subject();
-        if (_this._getListType() === 'action-list') {
+        if (_this._getListType() === 'action-list' && _elementRef) {
             _elementRef.nativeElement.classList.add('mat-action-list');
         }
         return _this;
@@ -142,12 +146,17 @@ var MatList = /** @class */ (function (_super) {
      */
     function () {
         /** @type {?} */
-        var nodeName = this._elementRef.nativeElement.nodeName.toLowerCase();
-        if (nodeName === 'mat-list') {
-            return 'list';
-        }
-        if (nodeName === 'mat-action-list') {
-            return 'action-list';
+        var elementRef = this._elementRef;
+        // @breaking-change 8.0.0 Remove null check once _elementRef is a required param.
+        if (elementRef) {
+            /** @type {?} */
+            var nodeName = elementRef.nativeElement.nodeName.toLowerCase();
+            if (nodeName === 'mat-list') {
+                return 'list';
+            }
+            if (nodeName === 'mat-action-list') {
+                return 'action-list';
+            }
         }
         return null;
     };
@@ -238,7 +247,9 @@ var MatListSubheaderCssMatStyler = /** @class */ (function () {
  */
 var MatListItem = /** @class */ (function (_super) {
     __extends(MatListItem, _super);
-    function MatListItem(_element, _changeDetectorRef, navList, list) {
+    function MatListItem(_element, navList, list, 
+    // @breaking-change 8.0.0 `_changeDetectorRef` to be made into a required parameter.
+    _changeDetectorRef) {
         var _this = _super.call(this) || this;
         _this._element = _element;
         _this._isInteractiveList = false;
@@ -252,15 +263,13 @@ var MatListItem = /** @class */ (function (_super) {
         if (element.nodeName.toLowerCase() === 'button' && !element.hasAttribute('type')) {
             element.setAttribute('type', 'button');
         }
-        if (_this._list) {
+        // @breaking-change 8.0.0 Remove null check for _changeDetectorRef.
+        if (_this._list && _changeDetectorRef) {
             // React to changes in the state of the parent list since
             // some of the item's properties depend on it (e.g. `disableRipple`).
-            _this._list._stateChanges.pipe(operators.takeUntil(_this._destroyed)).subscribe((/**
-             * @return {?}
-             */
-            function () {
+            _this._list._stateChanges.pipe(operators.takeUntil(_this._destroyed)).subscribe(function () {
                 _changeDetectorRef.markForCheck();
-            }));
+            });
         }
         return _this;
     }
@@ -326,26 +335,26 @@ var MatListItem = /** @class */ (function (_super) {
     /** @nocollapse */
     MatListItem.ctorParameters = function () { return [
         { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
         { type: MatNavList, decorators: [{ type: core.Optional }] },
-        { type: MatList, decorators: [{ type: core.Optional }] }
+        { type: MatList, decorators: [{ type: core.Optional }] },
+        { type: core.ChangeDetectorRef }
     ]; };
     MatListItem.propDecorators = {
-        _lines: [{ type: core.ContentChildren, args: [core$1.MatLine, { descendants: true },] }],
-        _avatar: [{ type: core.ContentChild, args: [MatListAvatarCssMatStyler, { static: false },] }],
-        _icon: [{ type: core.ContentChild, args: [MatListIconCssMatStyler, { static: false },] }]
+        _lines: [{ type: core.ContentChildren, args: [core$1.MatLine,] }],
+        _avatar: [{ type: core.ContentChild, args: [MatListAvatarCssMatStyler,] }],
+        _icon: [{ type: core.ContentChild, args: [MatListIconCssMatStyler,] }]
     };
     return MatListItem;
 }(_MatListItemMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
  */
-var /**
+var   /**
  * \@docs-private
  */
 MatSelectionListBase = /** @class */ (function () {
@@ -358,7 +367,7 @@ var _MatSelectionListMixinBase = core$1.mixinDisableRipple(MatSelectionListBase)
 /**
  * \@docs-private
  */
-var /**
+var   /**
  * \@docs-private
  */
 MatListOptionBase = /** @class */ (function () {
@@ -374,10 +383,7 @@ var _MatListOptionMixinBase = core$1.mixinDisableRipple(MatListOptionBase);
  */
 var MAT_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef((/**
-     * @return {?}
-     */
-    function () { return MatSelectionList; })),
+    useExisting: core.forwardRef(function () { return MatSelectionList; }),
     multi: true
 };
 /**
@@ -414,21 +420,6 @@ var MatListOption = /** @class */ (function (_super) {
         _this.checkboxPosition = 'after';
         return _this;
     }
-    Object.defineProperty(MatListOption.prototype, "color", {
-        /** Theme color of the list option. This sets the color of the checkbox. */
-        get: /**
-         * Theme color of the list option. This sets the color of the checkbox.
-         * @return {?}
-         */
-        function () { return this._color || this.selectionList.color; },
-        set: /**
-         * @param {?} newValue
-         * @return {?}
-         */
-        function (newValue) { this._color = newValue; },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(MatListOption.prototype, "value", {
         /** Value of the option */
         get: /**
@@ -508,15 +499,12 @@ var MatListOption = /** @class */ (function (_super) {
         // that the form control value is not being overwritten.
         /** @type {?} */
         var wasSelected = this._selected;
-        Promise.resolve().then((/**
-         * @return {?}
-         */
-        function () {
+        Promise.resolve().then(function () {
             if (_this._selected || wasSelected) {
                 _this.selected = true;
                 _this._changeDetector.markForCheck();
             }
-        }));
+        });
     };
     /**
      * @return {?}
@@ -538,12 +526,7 @@ var MatListOption = /** @class */ (function (_super) {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
-            Promise.resolve().then((/**
-             * @return {?}
-             */
-            function () {
-                _this.selected = false;
-            }));
+            Promise.resolve().then(function () { return _this.selected = false; });
         }
         /** @type {?} */
         var hadFocus = this._hasFocus;
@@ -710,11 +693,6 @@ var MatListOption = /** @class */ (function (_super) {
                         'tabindex': '-1',
                         '[class.mat-list-item-disabled]': 'disabled',
                         '[class.mat-list-item-with-avatar]': '_avatar || _icon',
-                        // Manually set the "primary" or "warn" class if the color has been explicitly
-                        // set to "primary" or "warn". The pseudo checkbox picks up these classes for
-                        // its theme. The accent theme palette is the default and doesn't need to be set.
-                        '[class.mat-primary]': 'color === "primary"',
-                        '[class.mat-warn]': 'color === "warn"',
                         '[attr.aria-selected]': 'selected.toString()',
                         '[attr.aria-disabled]': 'disabled.toString()',
                     },
@@ -727,18 +705,14 @@ var MatListOption = /** @class */ (function (_super) {
     MatListOption.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
-        { type: MatSelectionList, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
-                         * @return {?}
-                         */
-                        function () { return MatSelectionList; })),] }] }
+        { type: MatSelectionList, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return MatSelectionList; }),] }] }
     ]; };
     MatListOption.propDecorators = {
-        _avatar: [{ type: core.ContentChild, args: [MatListAvatarCssMatStyler, { static: false },] }],
-        _icon: [{ type: core.ContentChild, args: [MatListIconCssMatStyler, { static: false },] }],
+        _avatar: [{ type: core.ContentChild, args: [MatListAvatarCssMatStyler,] }],
+        _icon: [{ type: core.ContentChild, args: [MatListIconCssMatStyler,] }],
         _lines: [{ type: core.ContentChildren, args: [core$1.MatLine,] }],
-        _text: [{ type: core.ViewChild, args: ['text', { static: false },] }],
+        _text: [{ type: core.ViewChild, args: ['text',] }],
         checkboxPosition: [{ type: core.Input }],
-        color: [{ type: core.Input }],
         value: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         selected: [{ type: core.Input }]
@@ -761,10 +735,6 @@ var MatSelectionList = /** @class */ (function (_super) {
          * Tabindex of the selection list.
          */
         _this.tabIndex = 0;
-        /**
-         * Theme color of the selection list. This sets the checkbox color for all list options.
-         */
-        _this.color = 'accent';
         _this._disabled = false;
         /**
          * The currently selected options.
@@ -773,11 +743,7 @@ var MatSelectionList = /** @class */ (function (_super) {
         /**
          * View to model callback that should be called whenever the selected options change.
          */
-        _this._onChange = (/**
-         * @param {?} _
-         * @return {?}
-         */
-        function (_) { });
+        _this._onChange = function (_) { };
         /**
          * Subscription to sync value changes in the SelectionModel back to the SelectionList.
          */
@@ -785,10 +751,7 @@ var MatSelectionList = /** @class */ (function (_super) {
         /**
          * View to model callback that should be called if the list or its options lost focus.
          */
-        _this._onTouched = (/**
-         * @return {?}
-         */
-        function () { });
+        _this._onTouched = function () { };
         _this.tabIndex = parseInt(tabIndex) || 0;
         return _this;
     }
@@ -826,21 +789,14 @@ var MatSelectionList = /** @class */ (function (_super) {
             .withTypeAhead()
             // Allow disabled items to be focusable. For accessibility reasons, there must be a way for
             // screenreader users, that allows reading the different options of the list.
-            .skipPredicate((/**
-         * @return {?}
-         */
-        function () { return false; }))
+            .skipPredicate(function () { return false; })
             .withAllowedModifierKeys(['shiftKey']);
         if (this._tempValues) {
             this._setOptionsFromValues(this._tempValues);
             this._tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this._modelChanges = this.selectedOptions.onChange.subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
+        this._modelChanges = this.selectedOptions.onChange.subscribe(function (event) {
             if (event.added) {
                 for (var _i = 0, _a = event.added; _i < _a.length; _i++) {
                     var item = _a[_i];
@@ -853,7 +809,7 @@ var MatSelectionList = /** @class */ (function (_super) {
                     item.selected = false;
                 }
             }
-        }));
+        });
     };
     /**
      * @param {?} changes
@@ -865,11 +821,8 @@ var MatSelectionList = /** @class */ (function (_super) {
      */
     function (changes) {
         /** @type {?} */
-        var disableRippleChanges = changes['disableRipple'];
-        /** @type {?} */
-        var colorChanges = changes['color'];
-        if ((disableRippleChanges && !disableRippleChanges.firstChange) ||
-            (colorChanges && !colorChanges.firstChange)) {
+        var disableRippleChanges = changes.disableRipple;
+        if (disableRippleChanges && !disableRippleChanges.firstChange) {
             this._markOptionsForCheck();
         }
     };
@@ -880,7 +833,6 @@ var MatSelectionList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._destroyed = true;
         this._modelChanges.unsubscribe();
     };
     /** Focuses the selection list. */
@@ -999,11 +951,7 @@ var MatSelectionList = /** @class */ (function (_super) {
                 break;
             case keycodes.A:
                 if (keycodes.hasModifierKey(event, 'ctrlKey')) {
-                    this.options.find((/**
-                     * @param {?} option
-                     * @return {?}
-                     */
-                    function (option) { return !option.selected; })) ? this.selectAll() : this.deselectAll();
+                    this.options.find(function (option) { return !option.selected; }) ? this.selectAll() : this.deselectAll();
                     event.preventDefault();
                 }
                 break;
@@ -1025,10 +973,7 @@ var MatSelectionList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        // Stop reporting value changes after the list has been destroyed. This avoids
-        // cases where the list might wrongly reset its value once it is removed, but
-        // the form control is still live.
-        if (this.options && !this._destroyed) {
+        if (this.options) {
             this._onChange(this._getSelectedOptionValues());
         }
     };
@@ -1122,33 +1067,21 @@ var MatSelectionList = /** @class */ (function (_super) {
      */
     function (values) {
         var _this = this;
-        this.options.forEach((/**
-         * @param {?} option
-         * @return {?}
-         */
-        function (option) { return option._setSelected(false); }));
-        values.forEach((/**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        this.options.forEach(function (option) { return option._setSelected(false); });
+        values.forEach(function (value) {
             /** @type {?} */
-            var correspondingOption = _this.options.find((/**
-             * @param {?} option
-             * @return {?}
-             */
-            function (option) {
+            var correspondingOption = _this.options.find(function (option) {
                 // Skip options that are already in the model. This allows us to handle cases
                 // where the same primitive value is selected multiple times.
                 if (option.selected) {
                     return false;
                 }
                 return _this.compareWith ? _this.compareWith(option.value, value) : option.value === value;
-            }));
+            });
             if (correspondingOption) {
                 correspondingOption._setSelected(true);
             }
-        }));
+        });
     };
     /** Returns the values of the selected options. */
     /**
@@ -1162,15 +1095,7 @@ var MatSelectionList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.options.filter((/**
-         * @param {?} option
-         * @return {?}
-         */
-        function (option) { return option.selected; })).map((/**
-         * @param {?} option
-         * @return {?}
-         */
-        function (option) { return option.value; }));
+        return this.options.filter(function (option) { return option.selected; }).map(function (option) { return option.value; });
     };
     /** Toggles the state of the currently focused option if enabled. */
     /**
@@ -1220,15 +1145,11 @@ var MatSelectionList = /** @class */ (function (_super) {
         // emit the changed event when something actually changed.
         /** @type {?} */
         var hasChanged = false;
-        this.options.forEach((/**
-         * @param {?} option
-         * @return {?}
-         */
-        function (option) {
+        this.options.forEach(function (option) {
             if (option._setSelected(isSelected)) {
                 hasChanged = true;
             }
-        }));
+        });
         if (hasChanged) {
             this._reportValueChange();
         }
@@ -1282,11 +1203,7 @@ var MatSelectionList = /** @class */ (function (_super) {
      */
     function () {
         if (this.options) {
-            this.options.forEach((/**
-             * @param {?} option
-             * @return {?}
-             */
-            function (option) { return option._markForCheck(); }));
+            this.options.forEach(function (option) { return option._markForCheck(); });
         }
     };
     MatSelectionList.decorators = [
@@ -1318,7 +1235,6 @@ var MatSelectionList = /** @class */ (function (_super) {
         options: [{ type: core.ContentChildren, args: [MatListOption, { descendants: true },] }],
         selectionChange: [{ type: core.Output }],
         tabIndex: [{ type: core.Input }],
-        color: [{ type: core.Input }],
         compareWith: [{ type: core.Input }],
         disabled: [{ type: core.Input }]
     };
@@ -1327,7 +1243,7 @@ var MatSelectionList = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var MatListModule = /** @class */ (function () {
     function MatListModule() {
@@ -1365,12 +1281,20 @@ var MatListModule = /** @class */ (function () {
 }());
 
 exports.MatListModule = MatListModule;
+exports.MatListBase = MatListBase;
+exports._MatListMixinBase = _MatListMixinBase;
+exports.MatListItemBase = MatListItemBase;
+exports._MatListItemMixinBase = _MatListItemMixinBase;
 exports.MatNavList = MatNavList;
 exports.MatList = MatList;
 exports.MatListAvatarCssMatStyler = MatListAvatarCssMatStyler;
 exports.MatListIconCssMatStyler = MatListIconCssMatStyler;
 exports.MatListSubheaderCssMatStyler = MatListSubheaderCssMatStyler;
 exports.MatListItem = MatListItem;
+exports.MatSelectionListBase = MatSelectionListBase;
+exports._MatSelectionListMixinBase = _MatSelectionListMixinBase;
+exports.MatListOptionBase = MatListOptionBase;
+exports._MatListOptionMixinBase = _MatListOptionMixinBase;
 exports.MAT_SELECTION_LIST_VALUE_ACCESSOR = MAT_SELECTION_LIST_VALUE_ACCESSOR;
 exports.MatSelectionListChange = MatSelectionListChange;
 exports.MatListOption = MatListOption;

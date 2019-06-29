@@ -38,11 +38,11 @@ export declare class MatCheckboxChange {
     checked: boolean;
 }
 /** @docs-private */
-declare class MatCheckboxBase {
+export declare class MatCheckboxBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-declare const _MatCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableRippleCtor & CanDisableCtor & typeof MatCheckboxBase;
+export declare const _MatCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableRippleCtor & CanDisableCtor & typeof MatCheckboxBase;
 /**
  * A material design checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A MatCheckbox can be either checked, unchecked, indeterminate, or
@@ -143,4 +143,3 @@ export declare class MatCheckbox extends _MatCheckboxMixinBase implements Contro
     _onInteractionEvent(event: Event): void;
     private _getAnimationClassForCheckStateTransition;
 }
-export {};

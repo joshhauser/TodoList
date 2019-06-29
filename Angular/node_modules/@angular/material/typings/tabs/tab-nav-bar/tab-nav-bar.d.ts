@@ -13,11 +13,11 @@ import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, CanDisableRipple, C
 import { MatInkBar } from '../ink-bar';
 import { FocusMonitor } from '@angular/cdk/a11y';
 /** @docs-private */
-declare class MatTabNavBase {
+export declare class MatTabNavBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-declare const _MatTabNavMixinBase: CanDisableRippleCtor & CanColorCtor & typeof MatTabNavBase;
+export declare const _MatTabNavMixinBase: CanDisableRippleCtor & CanColorCtor & typeof MatTabNavBase;
 /**
  * Navigation component matching the styles of the tab group header.
  * Provides anchored navigation with animated ink bar.
@@ -50,16 +50,20 @@ export declare class MatTabNav extends _MatTabNavMixinBase implements AfterConte
     /** Aligns the ink bar to the active link. */
     _alignInkBar(): void;
 }
-declare class MatTabLinkBase {
+export declare class MatTabLinkBase {
 }
-declare const _MatTabLinkMixinBase: HasTabIndexCtor & CanDisableRippleCtor & CanDisableCtor & typeof MatTabLinkBase;
+export declare const _MatTabLinkMixinBase: HasTabIndexCtor & CanDisableRippleCtor & CanDisableCtor & typeof MatTabLinkBase;
 /**
  * Link inside of a `mat-tab-nav-bar`.
  */
 export declare class MatTabLink extends _MatTabLinkMixinBase implements OnDestroy, CanDisable, CanDisableRipple, HasTabIndex, RippleTarget {
     private _tabNavBar;
     _elementRef: ElementRef;
-    private _focusMonitor;
+    /**
+     * @deprecated
+     * @breaking-change 8.0.0 `_focusMonitor` parameter to be made required.
+     */
+    private _focusMonitor?;
     /** Whether the tab link is active or not. */
     protected _isActive: boolean;
     /** Reference to the RippleRenderer for the tab-link. */
@@ -78,7 +82,11 @@ export declare class MatTabLink extends _MatTabLinkMixinBase implements OnDestro
      * @docs-private
      */
     readonly rippleDisabled: boolean;
-    constructor(_tabNavBar: MatTabNav, _elementRef: ElementRef, ngZone: NgZone, platform: Platform, globalRippleOptions: RippleGlobalOptions | null, tabIndex: string, _focusMonitor: FocusMonitor);
+    constructor(_tabNavBar: MatTabNav, _elementRef: ElementRef, ngZone: NgZone, platform: Platform, globalRippleOptions: RippleGlobalOptions | null, tabIndex: string, 
+    /**
+     * @deprecated
+     * @breaking-change 8.0.0 `_focusMonitor` parameter to be made required.
+     */
+    _focusMonitor?: FocusMonitor | undefined);
     ngOnDestroy(): void;
 }
-export {};
