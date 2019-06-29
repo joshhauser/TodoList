@@ -1,5 +1,5 @@
 <?php
-require_once("db_settings.php");
+require_once("../db_settings.php");
 
 $params = file_get_contents("php://input");
 $datas = json_decode($params);

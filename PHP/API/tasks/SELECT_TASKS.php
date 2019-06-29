@@ -1,6 +1,6 @@
 <?php
-
-require_once("db_settings.php");
+require_once("../db_settings.php");
+$boardID = $_GET['boardID'];
 $table = "tasks";
 $tasks = [];
 $index = 0;
@@ -11,7 +11,7 @@ or die("Impossible to connect");
 mysqli_select_db($connection,$db)
 or die("Database not found.");
 
-$request = "SELECT * from $table";
+$request = "SELECT * from $table WHERE boardID = $boardID";
 $result = mysqli_query($connection,$request);
 
 while($row = mysqli_fetch_row($result)){

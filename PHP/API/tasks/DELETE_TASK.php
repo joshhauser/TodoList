@@ -1,5 +1,5 @@
 <?php
-require_once("db_settings.php");
+require_once("../db_settings.php");
 
 $id = $_GET['id'];
 
