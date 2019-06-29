@@ -1,6 +1,6 @@
 <mat-toolbar><p id="head">{{title}}</p></mat-toolbar>
-<div class="boards" fxFlexWrap="wrap" fxLayoutGap="1em" fxLayout="row">
-  <mat-card fxFlex fxLayoutAlign="center" *ngFor="let board of boards | async">
+<div class="boards" fxLayoutGap="1em" fxLayout="row wrap">
+  <mat-card (click)="goToBoard(board.id)" fxFlex="0 0 calc(20% - 0.8em)" fxLayoutAlign="center center" *ngFor="let board of boards | async">
     {{board.name}}
   </mat-card>
 </div>

@@ -23,5 +23,6 @@ export class BoardComponent implements OnInit {
     .then(() => this.boards = this.boardService.boards);
   }
 
-  
+  goToBoard(id: number){
+  }
 }

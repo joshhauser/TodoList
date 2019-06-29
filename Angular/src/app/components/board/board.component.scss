@@ -1,3 +1,12 @@
 .boards{
   margin: 3em 1.5em;
+
+  mat-card{
+    margin: 0 0 2em 0;
+    height: 5em;
+  }
+}
+
+.boards :nth-child(5n){
+  margin-right: 0 !important;
 }
