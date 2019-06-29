@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 import { BoardComponent } from './components/board/board.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { BoardComponent } from './components/board/board.component';
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
