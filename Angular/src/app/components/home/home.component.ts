@@ -4,7 +4,6 @@ import { Board } from 'src/app/model/model';
 import { BoardsService } from 'src/app/services/boards.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from '../dialogs/create-board/create-board.component';
-import { MatGridTileFooterCssMatStyler } from '@angular/material/grid-list';
 import { Router } from '@angular/router';
 
 @Component({
