@@ -1,4 +1,5 @@
 <h1 mat-dialog-title>Create a new board</h1>
+<mat-divider></mat-divider>
 <div fxLayout="column">
   <div class="tips" style="margin-top: 1em">
     <span>A board is a container for tasks. You can create as many board as you want, so that you can classify your tasks by category, relevance, priority...</span>
@@ -16,10 +17,11 @@
           {{color}}
         </mat-option>
       </mat-select>
+      <mat-hint>Optional</mat-hint>
     </mat-form-field>
   </form>
-  <div mat-dialog-actions>
-    <button mat-raised-button cdkFocusInitial>Cancel</button>
-    <button (click)="validate()" mat-raised-button color="warn" [disabled]="form.get('name').hasError('required') ? true : false">Confirm</button>
+  <div style="margin-top: 1em" fxLayoutAlign="end end" mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
+    <button (click)="validate()" mat-raised-button color="warn" [mat-dialog-close] [disabled]="form.get('name').hasError('required') ? true : false">Confirm</button>
   </div>
 </div>
