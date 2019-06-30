@@ -8,7 +8,6 @@
   -ms-user-select: none;
   user-select: none;
   
-
   mat-card{
     margin: 0 0 2em 0;
     height: 10em;
@@ -25,5 +24,18 @@
     height: 5em;
     font-size: 2em;
     color: gray;
+  }
+}
+
+@media screen and (max-width: 599px){
+  .boards{
+    padding-left: 0;
+    margin-top: 2em;
+
+    mat-card{
+      height: 10em;
+      width: 20em;
+      margin: 0 auto;
+    }
   }
 }

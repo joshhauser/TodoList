@@ -22,6 +22,6 @@
   </form>
   <div style="margin-top: 1em" fxLayoutAlign="end end" mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
-    <button (click)="validate()" mat-raised-button color="warn" [mat-dialog-close] [disabled]="form.get('name').hasError('required') ? true : false">Confirm</button>
+    <button (click)="validate()" mat-raised-button color="warn" [disabled]="form.get('name').hasError('required') ? true : false">Confirm</button>
   </div>
 </div>

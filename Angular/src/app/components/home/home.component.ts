@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateBoardComponent, {
       width: '700px',
       height: '450px',
-      autoFocus: false
+      autoFocus: false,
+      data: this.boards
     });
 
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());

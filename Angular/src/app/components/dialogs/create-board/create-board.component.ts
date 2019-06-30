@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BoardsService } from 'src/app/services/boards.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Board } from 'src/app/model/model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-create-board',
@@ -21,7 +24,9 @@ export class CreateBoardComponent implements OnInit {
 
   constructor(
     private boardService: BoardsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: BehaviorSubject<Board[]>,
+    public dialogRef: MatDialogRef<CreateBoardComponent>
   ) { }
 
   ngOnInit() {
@@ -29,16 +34,18 @@ export class CreateBoardComponent implements OnInit {
 
   // Validate the form
   validate(){
-    if(this.form.get('name').hasError('required')){
-      this.openSnackBar('You can\'t create a board with a blank name.');
+    const boardNames = this.data.value.map(board => board.name);
+
+    if(boardNames.indexOf(this.form.value.name) != -1){
+      this.openSnackBar('You can\'t choose a name which is already used !');
     }
     else{
       const board = {
         name: this.form.value.name,
         color: this.form.value.color != null ? this.form.value.color : '#424242'
       };
-
       this.boardService.createBoard(board);
+      this.dialogRef.close();
     }
   }
 
