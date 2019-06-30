@@ -11,7 +11,7 @@ or die("Impossible to connect");
 mysqli_select_db($connection,$db)
 or die("Database not found.");
 
-$insertRequest = "INSERT INTO $table(name)";
+$insertRequest = "INSERT INTO $table(name, color)";
 $insertRequest .= "VALUES(?,?)";
 
 $requestPrepare = mysqli_prepare($connection, $insertRequest);

@@ -14,9 +14,13 @@ export class CreateBoardComponent implements OnInit {
     name: new FormControl('', Validators.required),
     color: new FormControl()
   })
+  
+  public colors = ['#3f72ca','#f3a732','#e85454', '#54e85b', '#54b7e8'];
+
+  public validForm = false;
 
   constructor(
-    private board: BoardsService,
+    private boardService: BoardsService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -30,8 +34,10 @@ export class CreateBoardComponent implements OnInit {
     else{
       const board = {
         name: this.form.value.name,
-        color: this.form.value.color
-      }
+        color: this.form.value.color != null ? this.form.value.color : '#424242'
+      };
+
+      this.boardService.createBoard(board);
     }
   }
 
@@ -39,7 +45,4 @@ export class CreateBoardComponent implements OnInit {
     let snackbar = this.snackBar.open(message, 'Cancel');
     snackbar.onAction().subscribe(() => this.snackBar.dismiss());
   }
-  
-
-
 }
