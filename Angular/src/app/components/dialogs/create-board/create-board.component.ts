@@ -27,6 +27,7 @@ export class CreateBoardComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Validate the form
   validate(){
     if(this.form.get('name').hasError('required')){
       this.openSnackBar('You can\'t create a board with a blank name.');
@@ -41,8 +42,13 @@ export class CreateBoardComponent implements OnInit {
     }
   }
 
+  /**
+   * Open a snack bar to display a message
+   * @param message : the message to display
+   */
   openSnackBar(message: string){
     let snackbar = this.snackBar.open(message, 'Cancel');
+    // A click on the action causes the closing of the snackbar
     snackbar.onAction().subscribe(() => this.snackBar.dismiss());
   }
 }

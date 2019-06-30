@@ -2,9 +2,11 @@
 <mat-card id="to-do">
   <mat-card-title>To-do</mat-card-title>
   <mat-divider></mat-divider>
+  <!-- No tasks -->
   <div id="noTask" *ngIf="!_tasks.value || _tasks.value.length == 0">
     You don't have any task to achieve today !
   </div>
+  <!-- Tasks -->
   <mat-list *ngFor="let task of _tasks | async" fxLayout="row inline">
     <mat-list-item>
       <mat-checkbox labelPosition="after"><p>{{task.content}}</p></mat-checkbox>
@@ -15,6 +17,7 @@
     </mat-list-item>
   </mat-list>
   <mat-divider></mat-divider>
+  <!-- Add task -->
   <div id="form">
     <form>
       <mat-form-field>

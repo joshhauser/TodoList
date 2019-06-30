@@ -28,10 +28,15 @@ export class HomeComponent implements OnInit {
     .then(() => this.boards = this.boardService.boards);
   }
 
+  /**
+   * Redirect to the selected board
+   * @param id : the ID of the board to which the user will be redirected
+   */
   goToBoard(id: number){
     this.router.navigate(['board/' + id]);
   }
 
+  // Create a new board
   createBoard(){
     const dialogRef = this.dialog.open(CreateBoardComponent, {
       width: '700px',
