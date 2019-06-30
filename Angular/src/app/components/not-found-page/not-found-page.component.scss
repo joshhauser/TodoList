@@ -1,0 +1,26 @@
+#container{
+  min-height: 100vh;
+  background-color: #414141;
+  background-size: 100% 100%;
+  background-position: top center;
+  color: white;
+  
+  img{
+    width: 900px;
+    margin: 5em auto 0 auto;
+  }
+
+  p, button{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media(max-width: 900px){
+  #container{
+    img{
+      width: 300px;
+      margin-top: 30vh;
+    }
+  }
+}
