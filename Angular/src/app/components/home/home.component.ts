@@ -5,6 +5,7 @@ import { BoardsService } from 'src/app/services/boards.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from '../dialogs/create-board/create-board.component';
 import { MatGridTileFooterCssMatStyler } from '@angular/material/grid-list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   
   constructor(
     private boardService: BoardsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToBoard(id: number){
+    this.router.navigate(['board/' + id]);
   }
 
   createBoard(){
@@ -37,7 +40,6 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
-
   }
 
 
