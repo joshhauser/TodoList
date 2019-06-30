@@ -9,7 +9,8 @@
   <!-- Tasks -->
   <mat-list fxLayout="column">
     <mat-list-item *ngFor="let task of _tasks | async" >
-      <mat-checkbox labelPosition="after"><p>{{task.content}}</p></mat-checkbox>
+      <!-- <mat-checkbox labelPosition="after"><p>{{task.content}}</p></mat-checkbox> -->
+      <p>{{task.content}}</p>
       <span fxFlex="grow"></span>
       <button mat-icon-button (click)="deleteTask(task)">
         <mat-icon>delete</mat-icon>
