@@ -7,10 +7,10 @@
     You don't have any task to achieve today !
   </div>
   <!-- Tasks -->
-  <mat-list *ngFor="let task of _tasks | async" fxLayout="row inline">
-    <mat-list-item>
+  <mat-list fxLayout="column">
+    <mat-list-item *ngFor="let task of _tasks | async" >
       <mat-checkbox labelPosition="after"><p>{{task.content}}</p></mat-checkbox>
-      <div id="grow"></div> 
+      <span fxFlex="grow"></span>
       <button mat-icon-button (click)="deleteTask(task)">
         <mat-icon>delete</mat-icon>
       </button>

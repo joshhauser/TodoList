@@ -15,8 +15,8 @@ $insertRequest = "INSERT INTO $table(task, boardID)";
 $insertRequest .= "VALUES(?,?)";
 
 $requestPrepare = mysqli_prepare($connection, $insertRequest);
-$t = 0;
-mysqli_stmt_bind_param($requestPrepare,'si', $datas->data->taskContent, $t);
+
+mysqli_stmt_bind_param($requestPrepare,'si', $datas->data->taskContent, $datas->data->boardID);
 mysqli_stmt_execute($requestPrepare);
 mysqli_close($connection);
 ?>

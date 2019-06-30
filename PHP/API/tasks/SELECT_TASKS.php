@@ -5,6 +5,7 @@ $table = "tasks";
 $tasks = [];
 $index = 0;
 
+
 $connection = mysqli_connect($server,$login,$dbPass)
 or die("Impossible to connect");
 
@@ -17,6 +18,7 @@ $result = mysqli_query($connection,$request);
 while($row = mysqli_fetch_row($result)){
     $tasks[$index]['id'] = $row[0];
     $tasks[$index]['content'] = $row[1];
+    $tasks[$index]['boardID'] = $row[2];
     $index++;
 }
 
