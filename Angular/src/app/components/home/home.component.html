@@ -3,7 +3,7 @@
   <mat-card [style.background-color]="board.color" (click)="goToBoard(board.id)" fxLayoutAlign="center center" fxFlex="0 1 calc(25% - 3em)" fxFlex.lt-md="0 1 calc(50% - 3em)" fxFlex.lt-sm="auto"  *ngFor="let board of boards | async">
     {{board.name}}
   </mat-card>
-  <div (click)="createBoard()" id="createBoard" fxFlex="0 1 calc(25% - 1.5em)" fxFlex.lt-md="0 1 calc(50% - 1.5em)" fxFlex.lt-sm="100%" fxLayoutAlign="center center">
+  <div (click)="createBoard()" id="createBoard" fxFlex="0 1 calc(25% - 1.5em)" fxFlex.lt-md="0 1 calc(50% - 1.5em)" fxFlex.lt-sm="auto" fxLayoutAlign="center center">
     <span>+</span>
   </div>
 </div>

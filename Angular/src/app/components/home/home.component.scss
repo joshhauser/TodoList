@@ -33,8 +33,12 @@
     margin-top: 2em;
 
     mat-card{
-      height: 10em;
       width: 20em;
+      margin: 0 auto;
+    }
+
+    #createBoard{
+      width: 10em;
       margin: 0 auto;
     }
   }
