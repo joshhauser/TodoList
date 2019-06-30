@@ -41,21 +41,4 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
   }
-
-
-  /* createTask(listIndex: number): void {
-    const dialogRef = this.dialog.open(CreateTask, {
-      width: '500px',
-      height: '270px',
-      data: listIndex
-    });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      if(res != undefined && res != ''){
-        this.flushArrays();
-        this.getTasks();   
-      }
-    });
-  }
- */
 }
