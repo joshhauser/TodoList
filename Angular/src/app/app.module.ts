@@ -27,6 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CreateBoardComponent } from './components/dialogs/create-board/create-board.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
     BoardComponent,
     HomeComponent,
     CreateBoardComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    TasksListComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
     FlexLayoutModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],
