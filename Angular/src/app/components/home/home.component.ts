@@ -13,6 +13,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
+  @ViewChild(MatMenuTrigger) boardOptions: MatMenuTrigger;
 
   title= "To-do List";
   public boards = new Observable<Board[]>();
@@ -21,7 +23,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private boardService: BoardsService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    
   ) { }
 
   ngOnInit() {

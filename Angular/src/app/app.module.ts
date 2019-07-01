@@ -29,7 +29,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component'; 
 import { MatMenuModule } from '@angular/material/menu';
 
-
 @NgModule({
   declarations: [
     AppComponent,

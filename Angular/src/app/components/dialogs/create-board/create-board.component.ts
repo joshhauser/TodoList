@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BoardsService } from 'src/app/services/boards.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
