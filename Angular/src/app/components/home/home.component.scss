@@ -11,6 +11,15 @@
   mat-card{
     margin: 0 0 2em 0;
     height: 10em;
+
+    .boardOptions{
+      margin-top: -3%;
+      align-self: flex-end;
+    }
+
+    .boardName{
+      margin: 1.5em auto 0 auto;
+    }
   }
 
   mat-card:hover, #createBoard:hover{

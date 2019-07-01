@@ -1,7 +1,29 @@
 <mat-toolbar><p id="head">{{title}}</p></mat-toolbar>
 <div class="boards" fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="3em" fxLayoutAlign="flex-start">
   <mat-card [style.background-color]="board.color" (click)="goToBoard(board.id)" fxLayoutAlign="center center" fxFlex="0 1 calc(25% - 3em)" fxFlex.lt-md="0 1 calc(50% - 3em)" fxFlex.lt-sm="auto"  *ngFor="let board of boards | async">
-    {{board.name}}
+  <!-- Menu -->
+  <mat-card (click)="goToBoard(board.id)" [style.background-color]="board.color" fxLayout="column" fxFlex="0 1 calc(25% - 3em)" fxFlex.lt-md="0 1 calc(50% - 3em)" fxFlex.lt-sm="auto"  *ngFor="let board of boards | async">
+    <button class="boardOptions" [matMenuTriggerFor]="boardOptions" mat-icon-button (click)="openMenu($event)" aria-label="Options">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu #boardOptions="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+    <!-- Board name -->
+    <div class="boardName">
+      {{board.name}}
+    </div>
   </mat-card>
   <div (click)="createBoard()" id="createBoard" fxFlex="0 1 calc(25% - 1.5em)" fxFlex.lt-md="0 1 calc(50% - 1.5em)" fxFlex.lt-sm="100%" fxLayoutAlign="center center">
     <span>+</span>

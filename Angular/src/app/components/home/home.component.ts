@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Board } from 'src/app/model/model';
 import { BoardsService } from 'src/app/services/boards.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from '../dialogs/create-board/create-board.component';
 import { Router } from '@angular/router';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   title= "To-do List";
   public boards = new Observable<Board[]>();
+  @ViewChild(MatMenuTrigger) boardOptions: MatMenuTrigger;
   
   constructor(
     private boardService: BoardsService,
@@ -45,5 +47,12 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
+  }
+
+  // Open menu
+  openMenu(e: Event){
+    e.preventDefault();
+    e.stopPropagation();
+    this.boardOptions.openMenu();
   }
 }
