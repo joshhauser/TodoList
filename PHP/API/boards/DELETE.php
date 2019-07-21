@@ -12,7 +12,9 @@ mysqli_select_db($connection,$db)
 or die("Database not found.");
 
 $deleteRequest = "DELETE FROM $table WHERE id='$id'";
+$result = mysqli_query($connection, $deleteRequest);
 
+$deleteRequest = "DELETE FROM tasks WHERE boardID='$id'";
 $result = mysqli_query($connection, $deleteRequest);
 
 mysqli_close($connection);

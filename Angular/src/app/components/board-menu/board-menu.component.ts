@@ -29,6 +29,6 @@ export class BoardMenuComponent implements OnInit {
   }
 
   deleteBoard(){
-    this.boardService.deleteBoard(this.boardID);
+    this.boardService.deleteBoard(this.boardID).then(() => this.boardService.refreshBoards());
   }
 }
