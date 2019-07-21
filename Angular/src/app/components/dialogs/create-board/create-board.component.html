@@ -10,15 +10,20 @@
       <input formControlName="name" matInput placeholder="Board name" type="text" required>
       <mat-error *ngIf="form.get('name').invalid">You must choose a name for your new board.</mat-error>
     </mat-form-field>
-    <mat-form-field style="margin-top: 1em;">
-      <mat-label>Color:</mat-label>
-      <mat-select formControlName="color">
-        <mat-option *ngFor="let color of colors" [value]="color" [style.background-color]="color">
-          {{color}}
-        </mat-option>
-      </mat-select>
-      <mat-hint>Optional</mat-hint>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div>
+        <mat-form-field style="margin-top: 1em;">
+          <mat-label>Color:</mat-label>
+          <mat-select formControlName="color">
+            <mat-option *ngFor="let color of colors" [value]="color" [style.background-color]="color">
+              {{color}}
+            </mat-option>
+          </mat-select> 
+          <mat-hint>Optional</mat-hint>
+        </mat-form-field>
+      </div>
+      <div style="height: 2em; width: 10em" [style.background-color]="form.value.color"></div>
+    </div>
   </form>
   <div style="margin-top: 1em" fxLayoutAlign="end end" mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
