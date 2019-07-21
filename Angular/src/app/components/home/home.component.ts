@@ -14,11 +14,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 })
 export class HomeComponent implements OnInit {
   
-  @ViewChild(MatMenuTrigger) boardOptions: MatMenuTrigger;
-
   title= "To-do List";
   public boards = new Observable<Board[]>();
-  @ViewChild(MatMenuTrigger) boardOptions: MatMenuTrigger;
+  
   
   constructor(
     private boardService: BoardsService,
@@ -52,10 +50,4 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
   }
 
-  // Open menu
-  openMenu(e: Event){
-    e.preventDefault();
-    e.stopPropagation();
-    this.boardOptions.openMenu();
-  }
 }

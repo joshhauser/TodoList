@@ -22,8 +22,11 @@
     }
   }
 
-  #createBoard:hover{
+  mat-card:hover, #createBoard:hover{
     cursor: pointer;
+  }
+
+  #createBoard:hover{
     transform: scale(1.05);
     transition: all 200ms;
   }

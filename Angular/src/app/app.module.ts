@@ -28,6 +28,7 @@ import { CreateBoardComponent } from './components/dialogs/create-board/create-b
 import { MatSelectModule } from '@angular/material/select';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component'; 
 import { MatMenuModule } from '@angular/material/menu';
+import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatMenuModule } from '@angular/material/menu';
     BoardComponent,
     HomeComponent,
     CreateBoardComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    BoardMenuComponent
   ],
   imports: [
     BrowserModule,
