@@ -31,7 +31,7 @@ export class BoardsService {
   }
 
   editBoard(board: any){
-    return this.httpClient.put(this.url + 'UPDATE.php', { data: board }).toPromise()
+    return this.httpClient.put(this.url + 'UPDATE.php', {data: board}).toPromise()
     .then(() => this.refreshBoards());
   }
 }

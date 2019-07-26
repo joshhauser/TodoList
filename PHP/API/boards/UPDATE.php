@@ -1,5 +1,5 @@
 <?php
-require_once("db_settings.php");
+require_once("../db_settings.php");
 
 // Get datas
 $params = file_get_contents('php://input');
@@ -17,9 +17,9 @@ $id = $datas->data->id;
 $name = $datas->data->name;
 $color = $datas->data->color;
 
+
 // SQL Request
-$updateRequest = "UPDATE $table SET";
-$updateRequest .= "id = $id, ";
+$updateRequest = "UPDATE $table SET ";
 $updateRequest .= "name = '$name', ";
 $updateRequest .= "color = '$color' ";
 $updateRequest .= "WHERE id = $id";

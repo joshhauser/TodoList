@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-/* Angular Material & Animations */
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatGridListModule } from '@angular/material/grid-list'; 
@@ -24,7 +23,7 @@ import { BoardComponent } from './components/board/board.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './components/home/home.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CreateBoardComponent } from './components/dialogs/create-board/create-board.component';
+import { ConfigureBoardComponent } from './components/dialogs/configure-board/configure-board.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component'; 
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,7 +34,7 @@ import { BoardMenuComponent } from './components/board-menu/board-menu.component
     AppComponent,
     BoardComponent,
     HomeComponent,
-    CreateBoardComponent,
+    ConfigureBoardComponent,
     NotFoundPageComponent,
     BoardMenuComponent
   ],
@@ -65,7 +64,7 @@ import { BoardMenuComponent } from './components/board-menu/board-menu.component
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    CreateBoardComponent
+    ConfigureBoardComponent
   ]
 })
 export class AppModule { }

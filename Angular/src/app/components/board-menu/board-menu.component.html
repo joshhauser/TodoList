@@ -3,6 +3,10 @@
     <mat-icon>more_horiz</mat-icon>
   </button>
   <mat-menu #boardOptions="matMenu">
+    <button class="menu-item" (click)="editBoard()" mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
     <button class="menu-item" (click)="deleteBoard()" mat-menu-item>
       <mat-icon>delete</mat-icon>
       <span>Delete</span>

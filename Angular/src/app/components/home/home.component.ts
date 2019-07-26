@@ -3,9 +3,8 @@ import { Observable } from 'rxjs';
 import { Board } from 'src/app/model/model';
 import { BoardsService } from 'src/app/services/boards.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateBoardComponent } from '../dialogs/create-board/create-board.component';
+import { ConfigureBoardComponent } from '../dialogs/configure-board/configure-board.component';
 import { Router } from '@angular/router';
-import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'home',
@@ -40,14 +39,13 @@ export class HomeComponent implements OnInit {
 
   // Create a new board
   createBoard(){
-    const dialogRef = this.dialog.open(CreateBoardComponent, {
+    const dialogRef = this.dialog.open(ConfigureBoardComponent, {
       width: '700px',
       height: '450px',
       autoFocus: false,
       data: { 
         boards: this.boards,
-        mode: 'create',
-        currentBoardID: 1
+        mode: 'create'
       }
     });
 
