@@ -19,22 +19,27 @@ export class CreateBoardComponent implements OnInit {
   })
   
   public colors = ['#3f72ca','#f3a732','#e85454', '#54e85b', '#54b7e8'];
-
   public validForm = false;
+  public currentBoard: Board;
 
   constructor(
     private boardService: BoardsService,
     private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: BehaviorSubject<Board[]>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CreateBoardComponent>
   ) { }
 
   ngOnInit() {
+    if(this.data.mode === 'edit' && this.data.currentBoardID != undefined){
+      this.currentBoard = this.data.boards.find(board => board.id == this.data.currentBoardID);
+      this.form.value.name = this.currentBoard.name;
+      this.form.value.color = this.currentBoard.color;
+    }
   }
 
   // Validate the form
   validate(){
-    const boardNames = this.data.value.map(board => board.name);
+    const boardNames = this.data.boards.value.map(board => board.name);
 
     if(boardNames.indexOf(this.form.value.name) != -1){
       this.openSnackBar('You can\'t choose a name which is already used !');
@@ -44,10 +49,22 @@ export class CreateBoardComponent implements OnInit {
         name: this.form.value.name,
         color: this.form.value.color != null ? this.form.value.color : '#424242'
       };
-      this.boardService.createBoard(board);
+      
+      if(this.data.mode === 'create'){
+        this.boardService.createBoard(board);
+      }
+      else if(this.data.mode === 'edit'){
+        board["id"] = this.currentBoard.id;
+        this.boardService.editBoard(board);
+      }
+      else{
+        return;
+      }
+
       this.dialogRef.close();
     }
   }
+
 
   /**
    * Open a snack bar to display a message

@@ -29,4 +29,9 @@ export class BoardsService {
     return this.httpClient.delete(this.url + 'DELETE.php?id=' + boardID).toPromise()
     .then(() => this.refreshBoards());
   }
+
+  editBoard(board: any){
+    return this.httpClient.put(this.url + 'UPDATE.php', { data: board }).toPromise()
+    .then(() => this.refreshBoards());
+  }
 }

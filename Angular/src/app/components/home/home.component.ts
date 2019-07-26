@@ -44,7 +44,11 @@ export class HomeComponent implements OnInit {
       width: '700px',
       height: '450px',
       autoFocus: false,
-      data: this.boards
+      data: { 
+        boards: this.boards,
+        mode: 'create',
+        currentBoardID: 1
+      }
     });
 
     dialogRef.afterClosed().subscribe(() => this.boardService.refreshBoards());
