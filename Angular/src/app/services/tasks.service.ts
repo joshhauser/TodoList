@@ -9,7 +9,7 @@ import { Task } from '../model/model';
 })
 export class TasksService {
 
-  url = 'http://localhost/todolist/API/tasks/';
+  url = 'http://jhauserprojects.000webhostapp.com/todolist/API/tasks/';
 
   public tasks: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(null);
 
