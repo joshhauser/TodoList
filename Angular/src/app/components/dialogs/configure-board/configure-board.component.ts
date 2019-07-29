@@ -46,9 +46,10 @@ export class ConfigureBoardComponent implements OnInit {
 
   // Validate the form
   validate(){
-    const boardNames = this.data.boards.value.map(board => board.name);
+    let boardNames;
+    if(this.data.boards != undefined && this.data.boards.value != undefined) boardNames = this.data.boards.value.map(board => board.name);
 
-    if(boardNames.indexOf(this.form.value.name) != -1 && this.form.value.name != this.currentBoard.name){
+    if(boardNames.indexOf(this.form.value.name) != -1 && this.form.value.name != this.currentBoard.name && boardNames != undefined){
       this.openSnackBar('You can\'t choose a name which is already used !');
     }
     else{
