@@ -10,7 +10,7 @@ export class BoardsService {
 
   public boards = new BehaviorSubject<Board[]>(null);
   
-  private url = 'http://jhauserprojects.000webhostapp.com/todolist/API/boards/';
+  private url = 'https://jhauserprojects.000webhostapp.com/todolist/API/boards/';
   constructor(
     private httpClient: HttpClient
   ) { }
