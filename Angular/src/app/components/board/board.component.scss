@@ -3,7 +3,6 @@
   margin-right: auto;
   width: 50%;
   margin-top: 5%;
-  overflow: hidden;
   margin-bottom: 5%;
 
   -webkit-touch-callout: none;
@@ -35,5 +34,15 @@
     text-align: center;
     font-family: Arial;
     font-weight: bold;
+  }
+
+  .task{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #tasks{
+    margin-bottom: 0.8em;
   }
 }
