@@ -1,12 +1,7 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # compiled output
 /Angular/dist
 /tmp
 /out-tsc
-
-# Only exists if Bazel was run
-/bazel-out
 
 # dependencies
 /Angular/node_modules
@@ -46,4 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-README.md
+# PHPMYSQL settings
+PHP/API/db_settings.php
