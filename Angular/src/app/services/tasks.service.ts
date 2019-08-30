@@ -9,8 +9,8 @@ import { Task } from '../model/model';
 })
 export class TasksService {
 
-  //private url = 'http://localhost/todolist/API/tasks/'
-  private url = 'https://jhauserprojects.000webhostapp.com/todolist/API/tasks/';
+  private url = 'http://localhost/todolist/API/tasks/'
+  //private url = 'https://jhauserprojects.000webhostapp.com/todolist/API/tasks/';
 
   public tasks: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(null);
 
