@@ -13,7 +13,7 @@ import { ConfigureBoardComponent } from '../dialogs/configure-board/configure-bo
 export class BoardMenuComponent implements OnInit {
 
   @Input() boardID : number;
-  @ViewChild(MatMenuTrigger) boardOptions: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) boardOptions: MatMenuTrigger;
   
   constructor(
     private router: Router,
